@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <audio id="home-music">
-      <source src="../moneymario/sounds/music-Title.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-    <link rel="stylesheet" href="./css/home-style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/home-style.css" />
     <script type="module" src="./js/home.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Money Mario</title>
   </head>
   <body>
-    <div id="container" class="flex">
-      <div id="title" class="flex"></div>
-      <div id="collect"></div>
-      <div id="coins" class="grid">
-        <div class="coin"></div>
-        <div class="coin"></div>
-        <div class="coin"></div>
-        <div class="coin"></div>
-        <div class="coin"></div>
+    <section id="all">
+      <div id="container" class="flex">
+        <div id="title" class="flex"></div>
+        <div id="collect"></div>
+        <div id="coins" class="grid">
+          <div class="coin"></div>
+          <div class="coin"></div>
+          <div class="coin"></div>
+          <div class="coin"></div>
+          <div class="coin"></div>
+        </div>
       </div>
-    </div>
+    </section>
   </body>
 </html>

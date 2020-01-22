@@ -1,11 +1,30 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+@font-face {
+  font-family: "Super Mario 256 Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Super Mario 256 Regular"),
+    url("SuperMario256.woff") format("woff");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Super Mario 256 Regular", cursive;
+  color: black;
 }
 
 .flex {
   display: flex;
+}
+
+#all {
+  background-image: url(../img/background-home.gif);
+  background-size: contain;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 #container {
@@ -13,9 +32,7 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
-  background-image: url(../img/background-home.gif);
-  background-size: contain;
+
   /* animation: color-change-4x 6s linear infinite alternate both */
 }
 
@@ -59,6 +76,21 @@
   background-position: bottom;
   width: calc(300px / 6);
   animation: animate6 1s steps(6) infinite;
+}
+
+.scale-out {
+  animation: scale-out-center 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 1;
+  }
 }
 
 @keyframes animate6 {
@@ -116,6 +148,7 @@
     animation-timing-function: ease-out;
   }
 }
+
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0;
@@ -130,5 +163,113 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+/*-----------------page2-------------------------------------------------------------------------------------------*/
+h1 {
+  margin-top: 20px;
+  font-size: 3em;
+}
+#title2 {
+  height: 10vh;
+  width: 100vw;
+  text-align: center;
+}
+
+#container2 {
+  display: grid;
+  justify-content: center;
+  opacity: 0.8;
+  grid-template-columns: repeat(7, auto);
+  grid-gap: 1vw;
+  height: 65vh;
+  width: 100%;
+}
+
+#container3 {
+  margin-top: 5vw;
+  display: grid;
+  justify-content: center;
+  align-items: stretch;
+  height: 30vh;
+  margin: 100px;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1vw;
+}
+
+.people {
+  cursor: none;
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+  /* border-radius: 300px; */
+  height: 60;
+  width: 20vw;
+  font-size: 1em;
+  border: 1px solid #eee;
+  background: #eee;
+  border-radius: 4px;
+  line-height: 2em;
+  border: 1px solid #aaa;
+  text-decoration: none;
+
+  -webkit-transition: all 0.3s linear;
+  -khtml-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+#container3 .people:hover {
+  transform: scale(1.2);
+}
+
+.green {
+  background: -webkit-linear-gradient(top, #56b870 0%, #a5c956 100%);
+}
+
+.darkred {
+  background: -webkit-linear-gradient(
+    left,
+    rgba(169, 3, 41, 1) 0%,
+    rgba(143, 2, 34, 1) 44%,
+    rgba(109, 0, 25, 1) 100%
+  ); /* Chrome10+,Safari5.1+ */
+}
+
+​.blue {
+  background: linear-gradient(
+    45deg,
+    rgba(62, 162, 229, 0.6786064767703957) 0%,
+    rgba(0, 23, 255, 1) 100%
+  );
+}
+
+#musicbox {
+  position: fixed;
+  z-index: 20000;
+  bottom: 20px;
+  right: 20px;
+  width: calc(250px / 5);
+  height: 50px;
+}
+
+.musicplay {
+  background: url(../img/music-5-250-50.png);
+  animation: animate5 1s steps(5) infinite;
+}
+
+.musicpause {
+  background: url(../img/music-5-250-50.png);
+  animation: animate5 5s steps(5) infinite;
+}
+
+@keyframes animate5 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 250px;
   }
 }
