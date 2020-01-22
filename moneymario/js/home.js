@@ -1,4 +1,18 @@
 var explainPage;
+const musicbox = document.getElementById("musicbox");
+musicbox.onclick = () => {
+  if (homeMusic.paused) {
+    homeMusic.play();
+    musicbox.classList.add("musicplay");
+    musicbox.classList.remove("musicpause");
+  } else {
+    homeMusic.pause();
+    musicbox.classList.remove("musicplay");
+    musicbox.classList.add("musicpause");
+  }
+  homeMusic.loop = true;
+};
+
 axios
   .get("./views/explain.html")
   .then(response => {
@@ -10,7 +24,7 @@ axios
   });
 const body = document.getElementById("all");
 const homeMusic = new Audio("./sounds/music-Title.mp3");
-(function start() {
+function start() {
   let score = 0;
   const coins = document.querySelectorAll(".coin");
   const title = document.getElementById("title");
@@ -51,10 +65,14 @@ const homeMusic = new Audio("./sounds/music-Title.mp3");
             body.innerHTML = explainPage;
             refreshPage2();
           }
-        }
+  
+}
+
+
+
       })
   );
-})();
+};
 
 function refreshPage2() {
   const peopleCard = document.querySelectorAll("#container2 .people");
@@ -74,17 +92,24 @@ function refreshPage2() {
   };
   peopleCard.forEach(e => (e.onmousemove = moveTheBar));
 
-  const musicbox = document.getElementById("musicbox");
-  musicbox.onclick = () => {
-    if (homeMusic.paused) {
-      homeMusic.play();
-      musicbox.classList.add("musicplay");
-      musicbox.classList.remove("musicpause");
-    } else {
-      homeMusic.pause();
-      musicbox.classList.remove("musicplay");
-      musicbox.classList.add("musicpause");
-    }
-    homeMusic.loop = true;
-  };
+
+
+  const tube = document.getElementById('tube')
+  tube.onclick = function() {
+  body.innerHTML = homePage;
+  start()
+  }
+  var homePage = ""
+  axios
+  .get("./index.html")
+  .then(response => {
+    homePage = response.data;
+    // Here we can do something with the response object
+  })
+  .catch(err => {
+    console.log("index.html is not find")
+  });
+  const body = document.getElementById("all");
 }
+
+start()
