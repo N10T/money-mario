@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+@font-face {
+  font-family: "Super Mario 256 Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Super Mario 256 Regular"),
+    url("SuperMario256.woff") format("woff");
+}
+
+/* font-family: 'Press Start 2P', cursive; */
+/*     
+color: #66BEFF;
+color: #92FE04;
+ */
+
+* {
+  	margin: 0;
+	  padding: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    overflow: hidden;
+  }
+
+#all{
+    height: 100vh;
+    width: 100vw;
+
+  }
+  
+#chrono {
+  height: 5%;
+  width: 100vw;
+}
+
+#main {
+  background: url(../img/background-mario-wallpaper-20-main.png);
+  background-position: bottom ;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 95%;
+  width: 100vw;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4vw, 1fr));
+  /* grid-template-rows:  repeat(12, 1fr); */
+  
+  
+  width: 100vw;
+  cursor: crosshair;  
+  font-size: 6px;
+}
+
+#left,#right{
+  height: 100vh;
+}
+
+#left>div,#right>div{
+  border: 1px solid black;
+}
+
+#dashboard {
+  background: url(../img/background-mario-wallpaper-20-dashboard.png);
+  background-size: contain;
+  background-repeat: round;
+  height: 10%;
+  width: 100vw;
+}
+
+#howto{
+background: url(../img/howto-5-250-50.png); 
+width: calc(250px/5);
+height: 55px;
+animation: animate5 1s steps(5) infinite;
+}
+
+.grille{
+  display: grid;
+  justify-content: center;
+  /* border: 1px black solid; */
+  text-align: center;
+  padding-top: 10px;
+  font-size: 0px;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+#points{
+  width: auto;
+padding-left: 40px;
+}
+
+#toad{
+border: none;
+margin: 0 auto;
+background: url(../img/Toad-walk-little-130-50.png);
+background-position: bottom;
+width: calc(130px/3);
+height: 50px;
+animation: animate3 1s steps(3) infinite;
+}
+
+.bomb {
+background: url(../img/bomb-8-994-100.png);
+width: calc(994px/8);
+height: 100px;
+animation: animatebomb 1s steps(8) infinite;
+background-position-y: bottom;
+}
+
+.bomb-about-to{
+background: url(../img/bomb-6-1423-235.png);
+width: calc(1423px/6);
+height: 235px;
+animation: animateexplose 1s steps(6) infinite;
+background-position-y: bottom;
+}
+
+.bomb-explose {
+  background: url(../img/bomb-6-606-100-explosion.png);
+  width: calc(606px/6);
+  height: 100px;
+  animation: animateexplose 1s steps(6) infinite;
+  background-position-y: bottom;
+}
+
+.start,.end{
+  display: grid;
+  grid-row: span 2;
+  border: none;
+  margin: 0 auto;
+  }
+
+.coin {
+    background: url(../img/classic-coin-6-50-300.png);
+    width: calc(300px/6);
+    height: 50px;
+    animation: animate6 1s steps(6) infinite;
+  }
+
+.bee{
+  background: url(../img/bee-4-100-427.png);
+  background-position: bottom;
+  width: calc(427px/4);
+  height: 100px;
+  animation: bee4 0.5s steps(4) infinite;
+}
+
+.cloud{
+  background: url(../img/nuage-8-100-526.png);
+  background-position: bottom;
+  width: calc(526px/8);
+  height: 100px;
+  animation: cloud8 2s steps(8) reverse infinite;
+}
+
+.music{
+  background: url(../img/music-5-250-50.png); 
+  width: calc(250px/5);
+  height: 50px;
+  animation: animate5 1s steps(5) infinite;
+}
+
+.lifes{
+  background: url(../img/1-up-mushroom-png-5-transparent.png); 
+  background-size: 50px ;
+  padding-left: 55px;
+
+  background-repeat: no-repeat;
+  height: 50px;
+}
+
+
+@keyframes cloud8 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 526px;
+  }
+}
+
+@keyframes bee4 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 427px;
+  }
+}
+
+@keyframes animate3 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 130px;
+  }
+}
+
+@keyframes animate5 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 250px;
+  }
+}
+
+@keyframes animate6 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: calc(50px*6);
+  }
+}
+
+@keyframes animatebomb {
+  from {
+    background-position: 994px;
+  }
+  to {
+    background-position: 0;
+  }
+}
+
+@keyframes animateexplose {
+  from {
+    background-position: 606px;
+  }
+  to {
+    background-position: 0;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.column{
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+}
+
+.space-around{
+  justify-content: space-around;
+}
+
+.vcenter{
+  align-items: center;
+}
+
+.vbottom{
+  align-items: flex-end;
+}
+
+.popup{
+  position: fixed;
+}
+
+
+/* 
+.horizontale{
+    display: flex;
+    justify-content: space-between;
+}
+
+.barre {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    font-size: 2vw;
+}
+
+.navbar {
+  position: fixed;
+  text-align: center;  
+  font-size: 2vw;
+    margin: 0px auto;
+    align-items: flex-end;
+    margin-top: 1vw;
+    justify-content: space-between;
+    display: flex;
+    width: 61vw;
+}
+
+.navbar div:not(#chrono){
+  width: 10vw;
+  color: white;
+  font-size: 1.2vw;
+  padding: 8px 8px;
+}
+
+/* .border {
+  border:0.5vw ridge #92FE04;
+  border-radius: 20px 20px 0px 0px;
+  border-bottom: none; 
+} */
+
+/* .navbar>* {
+  border:1vw ridge #92FE04;
+  border-radius: 20px 20px 0px 0px;
+  border-bottom: none; 
+} 
+
+#chrono {
+    font-size: 4vw;
+    color: black;
+    border-bottom: none;
+    text-align: left;
+    padding-left: 3vw;
+    width: 15vw;
+    /* background-color: #66BEFF; */
+/* }
+
+#sec {
+  font-size: 3vw;
+  padding-left: 30wv;
+  text-align: center;
+  width: 30%;
+}
+
+#milli {
+  font-size: 1.5vw; */
+
+
+/* .zone { */
+  /* background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw; 
+  text-align: center;
+
+  line-height: 2.2vw;
+  font-size: 1vw;
+
+
+  }
+
+  .grille {
+    border: 1px dashed grey;
+    font-size: 0%;
+    border: none;
+  }
+
+  /* .grille:hover {
+    background-image: url("https://www.shareicon.net/data/128x128/2016/07/15/796262_aim_512x512.png");
+    background-position: 1.3px;
+    background-size: 2.2vw;
+    font-size: 0%;
+    cursor: none;
+    z-index: 10;
+  }
+
+  .cible:hover {
+    background-image: url("./image/cible_viseur.png");
+    background-position: 2px;
+    background-size: 2.2vw;
+    font-size: 0%;
+    background-repeat: no-repeat;
+  } 
+
+  .cible {
+    background-image: url("https://cdn0.iconfinder.com/data/icons/thin-line-color-2/21/15_1-512.png");
+    background-position: 2px;
+    background-size: 2.2vw;
+    font-size: 0%;
+    background-repeat: no-repeat;
+
+  }
+
+  .gauche {
+    text-align: left;
+    font-size: 18px;
+  }
+  
+  .droite {
+    text-align: right;
+    font-size: 18px;
+  } */
+
+
+  .active {
+      -webkit-animation: flip-horizontal-bck 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+              animation: flip-horizontal-bck 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  }
+/* 
+.lol {
+  background-image: url(https://media0.giphy.com/media/1na6z52hLnseqT8Dpj/giphy.gif);
+  background-size: 100px;
+  margin: 0 200px;
+  position: absolute;
+} */
+
+/* ----------------------------------------------
+ * Generated by Animista on 2019-11-22 15:16:57
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation flip-horizontal-bck
+ * ----------------------------------------
+ */
+ @-webkit-keyframes flip-horizontal-bck {
+  0% {
+    -webkit-transform: translateZ(0) rotateX(0);
+            transform: translateZ(0) rotateX(0);
+  }
+  100% {
+    -webkit-transform: translateZ(-260px) rotateX(180deg);
+            transform: translateZ(-260px) rotateX(180deg);
+  }
+}
+@keyframes flip-horizontal-bck {
+  0% {
+    -webkit-transform: translateZ(0) rotateX(0);
+            transform: translateZ(0) rotateX(0);
+  }
+  100% {
+    -webkit-transform: translateZ(-260px) rotateX(180deg);
+            transform: translateZ(-260px) rotateX(180deg);
+  }
+}
+
+.bouge{
+  transform: translateX(2px);
+}

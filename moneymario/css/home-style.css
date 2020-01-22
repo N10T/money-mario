@@ -15,13 +15,20 @@
   color: black;
 }
 
+body {
+  background: url(../img/background-home.gif);
+  background-size: contain;
+  height: 100vh;
+  width: 100vw;
+}
+
 .flex {
   display: flex;
 }
 
 #all {
-  background-image: url(../img/background-home.gif);
-  background-size: contain;
+  /* background: url(../img/background-home.gif);
+  background-size: contain; */
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -171,10 +178,9 @@ h1 {
   margin-top: 20px;
   font-size: 3em;
   opacity: 1;
-
 }
 
-h2 {
+h2:not(.long) {
   margin-top: 20px;
   font-size: 2.5em;
   opacity: 1;
@@ -185,6 +191,11 @@ h2 {
   height: 15vh;
   width: 100vw;
   text-align: center;
+  background: no-repeat url('../img/AreYouReady.png');
+  background-size: auto;
+  background-position-x: center;
+  animation: pulsate-bck 1s ease-in-out infinite both;
+
 }
 
 #container2 {
@@ -200,8 +211,6 @@ h2 {
   display: grid;
   justify-content: center;
   align-items: flex-end;
-
-  /* height: 30vh; */
   margin: 2vw;
   grid-template-columns: repeat(3, auto);
   grid-gap: 1vw;
@@ -249,17 +258,21 @@ h2 {
   /* Old browsers */
   background: -moz-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
   /* FF3.6+ */
-  background: -webkit-gradient(linear,
-      left top,
-      left bottom,
-      color-stop(0%, #7abcff),
-      color-stop(44%, #60abf8),
-      color-stop(100%, #4096ee));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #7abcff),
+    color-stop(44%, #60abf8),
+    color-stop(100%, #4096ee)
+  );
   /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,
-      #7abcff 0%,
-      #60abf8 44%,
-      #4096ee 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #7abcff 0%,
+    #60abf8 44%,
+    #4096ee 100%
+  );
   /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%);
   /* Opera 11.10+ */
@@ -297,6 +310,11 @@ h2 {
   left: 0px;
 }
 
+.scale-up-bl {
+  -webkit-animation: scale-up-bl 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: scale-up-bl 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
 @keyframes animate5 {
   from {
     background-position: 0;
@@ -314,3 +332,171 @@ h2 {
     background-position: 0;
   }
 }
+
+@keyframes scale-up-bl {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+  50% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+  }
+}
+
+
+.people p{
+  font-size: 20px ;
+  margin: 0 20px;
+  text-align: center;
+  color: aliceblue;
+}
+
+.titre-score{
+background-image: url("../img/score.png");
+background-repeat: no-repeat;
+animation: pulsate-bck 1s ease-in-out infinite both;
+}
+.long{
+  margin-top: 20px;
+  font-size: 2.5em;
+  height: 0;
+  opacity: 1;
+}
+.walking-bomb{
+  background: url(../img/bomb-8-994-100.png);
+  width: calc(994px/8);
+  height: 100px;
+  animation: animatebomb 1s steps(8) infinite;
+}
+.falling-bomb{
+  background:  url("../img/falling-bomb-6-837-171.png");
+  width: calc(837px/6);
+  height: 171px;
+  animation: falling-bomb 1s steps(6) infinite;
+  transform: scale(1);
+
+}
+.falling-bomb-explose{
+  background: url('../img/bomb-floor-6-837-131.png');
+}
+.flying-koopa{
+  background: url('../img/koopa-fly-red-9-100-800.png');
+  width: calc(765px/9);
+  height: 100px;
+  animation: flying-koopa 1s steps(9) infinite;
+}
+.walking-koopa{
+  background: url('../img/koopa-walk-red-6-100-510.png');
+  width: calc(510px/6);
+  height: 100px;
+  animation: walking-koopa 1s steps(6) infinite;
+}
+.cloud{
+  background: url(../img/nuage-8-100-526.png);
+  width: calc(526px/8);
+  height: 100px;
+  animation: cloud8 2s steps(8) reverse infinite;
+  transform: scale(1.5);
+}
+.flying-bee{
+  background: url(../img/bee-4-100-427.png);
+  width: calc(427px/4);
+  height: 100px;
+  animation: bee4 0.5s steps(4) infinite;
+}
+.coin-image{
+  background: url('../img/classic-coin-6-50-300.png');
+  width: calc(300px / 6);
+  animation: animate6 1s steps(6) infinite;
+  width: 50px;
+  height: 50px;
+}
+
+.speed-fast{
+  background: url('../img/001-fast.png');
+  background-size: contain;
+  height: 70px;
+  width: 70px;
+}
+
+.speed-medium{
+  background: url('../img/003-medium.png');
+  background-size: contain;
+  height: 70px;
+  width: 70px;
+}
+
+.speed-slow{
+  background: url('../img/002-slow.png');
+  background-size: contain;
+  height: 70px;
+  width:70px;
+  text-align: center;
+}
+
+
+@keyframes falling-bomb {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 837px;
+  }
+}
+
+
+@keyframes walking-koopa {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 510px;
+  }
+}
+
+@keyframes flying-koopa {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 765px;
+  }
+}
+
+@keyframes bee4 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 427px;
+  }
+}
+
+@keyframes animatebomb {
+  from {
+    background-position: 994px;
+  }
+  to {
+    background-position: 0;
+  }
+}
+@keyframes cloud8 {
+    from {
+      background-position: 0;
+    }
+    to {
+      background-position: 526px;
+    }
+  }
