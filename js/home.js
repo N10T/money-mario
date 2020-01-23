@@ -76,7 +76,7 @@ function start() {
 function refreshPage2() {
   //--------------------------------------------------------------------------------------------------------------------
   const peopleCard = document.querySelectorAll("#container2 .people");
-  
+  const popup = document.getElementById("popup")
   const container = document.getElementById("container2");
   const tube = document.getElementById("tube");
   const body = document.getElementById("all");
@@ -84,6 +84,7 @@ function refreshPage2() {
   const gameCSS = "../css/game.css";
   var gameHTML = "";
   var homeHTML = "";
+
 
   axios
     .get("./index.html")
@@ -147,11 +148,14 @@ function refreshPage2() {
 
 function game() {
   //----------------------------------------------------------------------------------------------------------------
+  var x,y
+  
   var player = {
     score: 0,
     touchedBy: [],
     coinAt: [],
-    canPlayCasino: score > 9 ? true : false
+    canPlayCasino: score > 9 ? true : false,
+    maxBPM: 0,
   };
 
   var mode = {
@@ -164,7 +168,7 @@ function game() {
     },
     normal: {
       speed: 0.4,
-      life: 30,
+      life: 30 ,
       coin: 5,
       soundtrack: new Audio("./sounds/normal-soundtrack.mp3"),
       bpm: 0
@@ -196,7 +200,13 @@ function game() {
       life <= this.power
         ? (lifeDOM.textContent = "00")
         : (lifeDOM.textContent = twoDigits(life));
-      console.log(this.name, " make you lose ", this.power);
+        player.touchedBy.push(this.name)
+        if(+bpm.innerText.substring(0,bpm.innerText-4)> player.maxBPM) {player.maxBPM = +bpm.innerText.substring(0,bpm.innerText-4)}
+        popup.innerText = this.name + " make you lose " + this.power + " HP"
+        setTimeout(() => {
+          popup.innerText = ""
+        }, 4000);
+        
       if (!+lifeDOM.textContent) {
         setTimeout(() => {
           alert("You lose");
@@ -214,6 +224,31 @@ function game() {
       if (!p) {
         p = this.dom.classList.value.includes("start") ? "right" : "left";
       }
+
+      if (this.name === "Red Koopa") {
+        this.speed = mode[modeSelected].speed * this.speed + +score.textContent * Math.random();
+
+        this.x -= this.speed;
+        if(this.speed > 5) {
+          koopa.dom.classList.remove('walking-koopa')
+          koopa.dom.classList.add('flying-koopa')
+          this.y -=10
+
+
+        }
+        if( this.x < -80) this.x = window.innerWidth
+        this.dom.style.transform = `translate(${this.x}px,${this.y}px)`;
+        if (this.x < -window.innerWidth) this.x = this.dom.clientWidth + 20;
+        followCursor()
+      console.log(this.y)
+      console.log(followCursor()[1]-852)
+
+
+      
+      }
+
+
+
       if (this.name === "Bee") {
         this.speed =
           mode[modeSelected].speed * this.speed +
@@ -225,12 +260,12 @@ function game() {
       if (this.name === "Bob-ombs") {
         // this.speed =  this.speed ;
       }
-      if (p.includes("left")) {
+      if (p.includes("left") && this.name !== "Red Koopa") {
         this.x -= this.speed;
         this.dom.style.transform = `translate(${this.x}px,${this.y}px)`;
         if (this.x < -window.innerWidth) this.x = this.dom.clientWidth + 20;
       }
-      if (p.includes("right")) {
+      if (p.includes("right" && this.name !== "Red Koopa")) {
         this.x += this.speed;
         this.dom.style.transform = `translate(${this.x}px,${this.y}px) rotateY(180deg)`;
         if (this.x > window.innerWidth) this.x = -this.dom.clientWidth;
@@ -267,33 +302,44 @@ function game() {
   const lifeDOM = document.querySelector("#life p");
   lifeDOM.textContent = life;
   let upNdown = 1;
-  const bomb = new People("Bob-ombs", 20, document.querySelector(".bomb"));
+  const bomb = new People("Bob-ombs", 15, document.querySelector(".bomb"));
   const bees = document.querySelectorAll(".bee");
   const bee1 = new People("Bee", 5, bees[0]);
   const bee2 = new People("Bee", 5, bees[1]);
-  const cloud = new People("cloud", 10, document.querySelector(".cloud"));
+  const cloud = new People("cloud", 5, document.querySelector(".cloud"));
   const toad = document.getElementById("toad");
   const musicBox = document.querySelector(".music");
   const bpm = document.getElementById("bpm");
   const koopaDOM = document.querySelector(".walking-koopa")
   var coins;
   var score = document.querySelector("#score");
-
   const doItWalk = setInterval(bombWalk, 70);
   const doItFly = setInterval(beeFly, 70);
   const makeItRain = setInterval(cloudRain, 70);
+  const doKoopaFly = setInterval(koopaWalk, 70)
+  document.getElementById("all").addEventListener("mousemove",followCursor)
+  function followCursor(e){
+    let position = 0;
+    x = e ? e.clientX : x
+    y = e ? e.clientY : x
+  return [x,y];
+  };
+
+
   bomb.dom.addEventListener("mouseover", mouseOverBomb);
   bees.forEach(bee => bee.addEventListener("mouseover", mouseOverBee));
-  cloud.dom.addEventListener("mouseover", cloud.attack);
+  cloud.dom.addEventListener("mouseover", mouseOverCloud);
+
+  function mouseOverCloud(){  
+    cloud.attack();
+    e.target.removeEventListener("mouseover", mouseOverCloud);
+    setTimeout(() => {
+      e.target.addEventListener("mouseover", mouseOverCloud);
+    }, 2000);}
+
+  
   function mouseOverBee(e) {
     bee1.attack();
-    // let holdSpeed = bee1.speed
-    //   bee1.speed = 0
-    //   console.log('stop bee',bee1.speed);
-    //   setTimeout(() => {
-
-    //     bee1.speed = holdSpeed
-    //   }, 3000);
     e.target.removeEventListener("mouseover", mouseOverBee);
     setTimeout(() => {
       e.target.addEventListener("mouseover", mouseOverBee);
@@ -318,6 +364,10 @@ function game() {
   function beeFly() {
     bee1.move();
     bee2.move();
+  }
+
+  function koopaWalk(){
+    koopa.move()
   }
 
   function bombExplosion() {
@@ -351,10 +401,10 @@ function game() {
   }
 
   function mouseOverBomb() {
+    bomb.dom.removeEventListener("mouseover", mouseOverBomb);
     bomb.attack();
     bomb.dom.classList.remove("bomb");
     bomb.dom.classList.add("bomb-explose");
-    bomb.dom.removeEventListener("mouseover", mouseOverBomb);
     setTimeout(bombExplosion, 500);
     playSound(
       "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/mario-woo.WAV"
@@ -382,9 +432,16 @@ function game() {
 //   endGrille[n].classList.add('flying-koopa');
 // }
 
-const koopa = new People("Red Koopa")
+const koopa = new People("Red Koopa",7,koopaDOM)
 
+koopa.dom.addEventListener("mouseover", mouseOverKoopa);
 
+  function mouseOverKoopa(){  
+    koopa.attack();
+    e.target.removeEventListener("mouseover", mouseOverKoopa);
+    setTimeout(() => {
+      e.target.addEventListener("mouseover", mouseOverKoopa);
+    }, 2000);}
 
 
 

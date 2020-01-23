@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script type="module" src="game.js"></script>
+    <script type="module" src="./js/home.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Click'em all</title>
-    <link href="../css/game.css" rel="stylesheet" />
+    <link href="./css/game.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap"
       rel="stylesheet"
@@ -17,7 +17,7 @@
     />
   </head>
   <body>
-    <div class="popup"></div>
+    <div id="popup"></div>
     <section id="all" class="flex column">
       <!-- <section id="chrono" class="flex"></section> -->
       <section id="main" class="flex vbottom">
@@ -352,7 +352,7 @@
       <section id="dashboard" class="flex space-around vcenter">
         <div id="life" class="flex vcenter lifes">
           x
-          <p>00</p>
+          <p>00</p><span>HP</span>
         </div>
         <div id="points" class="flex vcenter">
           <p class="coin"></p>
