@@ -16,7 +16,7 @@
 }
 
 body {
-  background: url(../img/background-home.gif);
+  background: url("../img/background-home.gif");
   background-size: contain;
   height: 100vh;
   width: 100vw;
@@ -44,7 +44,7 @@ body {
 }
 
 #collect {
-  background-image: url(../img/collect-em-to-play.png);
+  background-image: url("../img/collect-em-to-play.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -57,7 +57,7 @@ body {
 }
 
 #title {
-  background-image: url(../img/home-title.png);
+  background-image: url("../img/home-title.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -79,7 +79,7 @@ body {
 }
 
 .coin {
-  background: url(../img/classic-coin-6-50-300.png);
+  background: url("../img/classic-coin-6-50-300.png");
   background-position: bottom;
   width: calc(300px / 6);
   animation: animate6 1s steps(6) infinite;
@@ -191,11 +191,10 @@ h2:not(.long) {
   height: 15vh;
   width: 100vw;
   text-align: center;
-  background: no-repeat url('../img/AreYouReady.png');
+  background: no-repeat url("../img/AreYouReady.png");
   background-size: auto;
   background-position-x: center;
   animation: pulsate-bck 1s ease-in-out infinite both;
-
 }
 
 #container2 {
@@ -291,17 +290,17 @@ h2:not(.long) {
 }
 
 .musicplay {
-  background: url(../img/music-5-250-50.png);
+  background: url("../img/music-5-250-50.png");
   animation: animate5 1s steps(5) infinite;
 }
 
 .musicpause {
-  background: url(../img/music-5-250-50.png);
+  background: url("../img/music-5-250-50.png");
   animation: animate5 5s steps(5) infinite;
 }
 
 #tube {
-  background: url(../img/tube-5-1000-48.png);
+  background: url("../img/tube-5-1000-48.png");
   animation: animatetube 1.5s steps(5) alternate-reverse infinite;
   width: calc(1000px / 5);
   height: 48px;
@@ -355,97 +354,94 @@ h2:not(.long) {
   }
 }
 
-
-.people p{
-  font-size: 20px ;
+.people p {
+  font-size: 20px;
   margin: 0 20px;
   text-align: center;
   color: aliceblue;
 }
 
-.titre-score{
-background-image: url("../img/score.png");
-background-repeat: no-repeat;
-animation: pulsate-bck 1s ease-in-out infinite both;
+.titre-score {
+  background-image: url("../img/score.png");
+  background-repeat: no-repeat;
+  animation: pulsate-bck 1s ease-in-out infinite both;
 }
-.long{
+.long {
   margin-top: 20px;
   font-size: 2.5em;
   height: 0;
   opacity: 1;
 }
-.walking-bomb{
-  background: url(../img/bomb-8-994-100.png);
-  width: calc(994px/8);
+.walking-bomb {
+  background: url("../img/bomb-8-994-100.png");
+  width: calc(994px / 8);
   height: 100px;
   animation: animatebomb 1s steps(8) infinite;
 }
-.falling-bomb{
-  background:  url("../img/falling-bomb-6-837-171.png");
-  width: calc(837px/6);
+.falling-bomb {
+  background: url("../img/falling-bomb-6-837-171.png");
+  width: calc(837px / 6);
   height: 171px;
   animation: falling-bomb 1s steps(6) infinite;
   transform: scale(1);
-
 }
-.falling-bomb-explose{
-  background: url('../img/bomb-floor-6-837-131.png');
+.falling-bomb-explose {
+  background: url("../img/bomb-floor-6-837-131.png");
 }
-.flying-koopa{
-  background: url('../img/koopa-fly-red-9-100-800.png');
-  width: calc(765px/9);
+.flying-koopa {
+  background: url("../img/koopa-fly-red-9-100-800.png");
+  width: calc(765px / 9);
   height: 100px;
   animation: flying-koopa 1s steps(9) infinite;
 }
-.walking-koopa{
-  background: url('../img/koopa-walk-red-6-100-510.png');
-  width: calc(510px/6);
+.walking-koopa {
+  background: url("../img/koopa-walk-red-6-100-510.png");
+  width: calc(510px / 6);
   height: 100px;
   animation: walking-koopa 1s steps(6) infinite;
 }
-.cloud{
-  background: url(../img/nuage-8-100-526.png);
-  width: calc(526px/8);
+.cloud {
+  background: url("../img/nuage-8-100-526.png");
+  width: calc(526px / 8);
   height: 100px;
   animation: cloud8 2s steps(8) reverse infinite;
   transform: scale(1.5);
 }
-.flying-bee{
-  background: url(../img/bee-4-100-427.png);
-  width: calc(427px/4);
+.flying-bee {
+  background: url("../img/bee-4-100-427.png");
+  width: calc(427px / 4);
   height: 100px;
   animation: bee4 0.5s steps(4) infinite;
 }
-.coin-image{
-  background: url('../img/classic-coin-6-50-300.png');
+.coin-image {
+  background: url("../img/classic-coin-6-50-300.png");
   width: calc(300px / 6);
   animation: animate6 1s steps(6) infinite;
   width: 50px;
   height: 50px;
 }
 
-.speed-fast{
-  background: url('../img/001-fast.png');
+.speed-fast {
+  background: url("../img/001-fast.png");
   background-size: contain;
   height: 70px;
   width: 70px;
 }
 
-.speed-medium{
-  background: url('../img/003-medium.png');
+.speed-medium {
+  background: url("../img/003-medium.png");
   background-size: contain;
   height: 70px;
   width: 70px;
 }
 
-.speed-slow{
-  background: url('../img/002-slow.png');
+.speed-slow {
+  background: url("../img/002-slow.png");
   background-size: contain;
   height: 70px;
-  width:70px;
+  width: 70px;
   text-align: center;
 }
-
 
 @keyframes falling-bomb {
   from {
@@ -455,7 +451,6 @@ animation: pulsate-bck 1s ease-in-out infinite both;
     background-position: 837px;
   }
 }
-
 
 @keyframes walking-koopa {
   from {
@@ -493,10 +488,10 @@ animation: pulsate-bck 1s ease-in-out infinite both;
   }
 }
 @keyframes cloud8 {
-    from {
-      background-position: 0;
-    }
-    to {
-      background-position: 526px;
-    }
+  from {
+    background-position: 0;
   }
+  to {
+    background-position: 526px;
+  }
+}
