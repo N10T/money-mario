@@ -30,21 +30,21 @@ function start() {
   const coins = document.querySelectorAll(".coin");
   const title = document.getElementById("title");
 
-  title.onmouseover = function() {
-    if (homeMusic.paused) {
-      homeMusic.play();
-      homeMusic.loop = true;
-    }
-    homeMusic.volume = 0.5;
-  };
+  // title.onmouseover = function() {
+  //   if (homeMusic.paused) {
+  //     homeMusic.play();
+  //     homeMusic.loop = true;
+  //   }
+  //   homeMusic.volume = 0.5;
+  // };
 
   coins.forEach(
     e =>
       (e.onclick = function(e) {
-        if (homeMusic.played) {
-          homeMusic.play();
-          homeMusic.loop = true;
-        }
+        // if (homeMusic.played) {
+        //   homeMusic.play();
+        //   homeMusic.loop = true;
+        // }
 
         score += 1;
         const coinSound = new Audio(
@@ -76,6 +76,7 @@ function start() {
 function refreshPage2() {
   //--------------------------------------------------------------------------------------------------------------------
   const peopleCard = document.querySelectorAll("#container2 .people");
+  
   const container = document.getElementById("container2");
   const tube = document.getElementById("tube");
   const body = document.getElementById("all");
@@ -83,13 +84,6 @@ function refreshPage2() {
   const gameCSS = "../css/game.css";
   var gameHTML = "";
   var homeHTML = "";
-
-
-
-
-
-
-
 
   axios
     .get("./index.html")
@@ -122,7 +116,6 @@ function refreshPage2() {
 
   function selectLevel() {
     new Audio("./sounds/select_level_kick.wav").play();
-    //play sound card swipe changer le listner
   }
 
   tube.onclick = function() {
@@ -138,7 +131,7 @@ function refreshPage2() {
   };
 
   function playTheGame(e) {
-    modeSelected = e.target.parentElement.id;
+    modeSelected = e.target.parentElement.id.match(/hard|normal|easy/gi) ? e.target.parentElement.id : e.target.id ;
     console.log(modeSelected);
     console.dir(e.target.parentElement.id);
 
@@ -155,30 +148,33 @@ function refreshPage2() {
 function game() {
   //----------------------------------------------------------------------------------------------------------------
   var player = {
-    score:0,
-    touchedBy:[],
-    coinAt:[],
-    canPlayCasino : score > 9 ? true : false
-  }
-  
+    score: 0,
+    touchedBy: [],
+    coinAt: [],
+    canPlayCasino: score > 9 ? true : false
+  };
+
   var mode = {
     hard: {
       speed: 0.5,
       life: 10,
       coin: 5,
-      soundtrack: new Audio("./sounds/hard-soundtrack.mp3")
+      soundtrack: new Audio("./sounds/hard-soundtrack.mp3"),
+      bpm: +10
     },
     normal: {
       speed: 0.4,
       life: 30,
       coin: 5,
-      soundtrack: new Audio("./sounds/normal-soundtrack.mp3")
+      soundtrack: new Audio("./sounds/normal-soundtrack.mp3"),
+      bpm: 0
     },
     easy: {
       speed: 0.3,
       life: 50,
       coin: 10,
-      soundtrack: new Audio("./sounds/easy-soundtrack.mp3")
+      soundtrack: new Audio("./sounds/easy-soundtrack.mp3"),
+      bpm: -20,
     }
   };
 
@@ -191,29 +187,28 @@ function game() {
       this.y = 0;
       this.soundURL = "";
       this.speed = this.name === "Bob-ombs" ? 5 : 10;
-      this.image = ""
+      this.image = "";
     }
 
     attack = () => {
-      if (this.power >= 10) {
-        playSound(ouch);
-      }
+      this.power >= 10 ? playSound(ouch) : playSound(bizz);
       life -= this.power;
       life <= this.power
         ? (lifeDOM.textContent = "00")
         : (lifeDOM.textContent = twoDigits(life));
       console.log(this.name, " make you lose ", this.power);
       if (!+lifeDOM.textContent) {
-        alert("You lose");
+        setTimeout(() => {
+          alert("You lose");
+        }, 500); 
         clearInterval(bombWalk);
         clearInterval(beeFly);
         clearInterval(cloudRain);
       }
-
     };
     gain = () => (score.textContent += this.power);
 
-    move(p){
+    move(p) {
       acurateSound();
 
       if (!p) {
@@ -242,8 +237,11 @@ function game() {
       }
     }
   }
-  const acurateSound = () =>
-    (mode[modeSelected].soundtrack.playbackRate = 1 + 0.01 * score.textContent);
+  const acurateSound = () => {
+    mode[modeSelected].soundtrack.playbackRate = 1 + 0.005 * score.textContent;
+    bpm.innerText =
+      Math.floor(mode[modeSelected].soundtrack.playbackRate * 90 + mode[modeSelected].bpm) + " BPM";
+  };
 
   // Audio -------------------------------------------------------------------------------------------
   homeMusic.pause();
@@ -260,7 +258,7 @@ function game() {
     "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/cannon-fire.WAV";
   const ouch =
     "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/mario-lowonhealth.WAV";
-  const bizz = "./sounds/bee_bump.wav";
+  const bizz = "../sounds/bee_bump.wav";
   // const marioSoundtrack = new Audio(
   //   "http://23.237.126.42/ost/super-mario-bros.-3/rifwvpjl/01%20-%20Grass%20Land.mp3"
   // );
@@ -275,7 +273,9 @@ function game() {
   const bee2 = new People("Bee", 5, bees[1]);
   const cloud = new People("cloud", 10, document.querySelector(".cloud"));
   const toad = document.getElementById("toad");
-  const musicBox = document.getElementById("items");
+  const musicBox = document.querySelector(".music");
+  const bpm = document.getElementById("bpm");
+  const koopaDOM = document.querySelector(".walking-koopa")
   var coins;
   var score = document.querySelector("#score");
 
@@ -303,6 +303,7 @@ function game() {
   repeatFunction(createACoin, 5);
 
   musicBox.onclick = () => {
+    new Audio("../sounds/pause.wav").play();
     mode[modeSelected].soundtrack.paused
       ? mode[modeSelected].soundtrack.play()
       : mode[modeSelected].soundtrack.pause();
@@ -374,6 +375,24 @@ function game() {
       : grille[n].classList.toggle("coin");
     refresh(coins);
   }
+
+// function createAkoopa(){
+//   const endGrille = [...document.querySelectorAll(".end.grille")].filter(a=> !a.className.match(/bee|bomb|flying-koopa/));
+//   let n = Math.floor(Math.random() * (endGrille.length-1))
+//   endGrille[n].classList.add('flying-koopa');
+// }
+
+const koopa = new People("Red Koopa")
+
+
+
+
+
+
+
+
+
+
 
   function refresh(dom) {
     if (dom === coins) {
