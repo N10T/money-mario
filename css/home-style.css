@@ -1,18 +1,19 @@
-@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+
 @font-face {
   font-family: "Super Mario 256 Regular";
   font-style: normal;
   font-weight: normal;
-  src: local("Super Mario 256 Regular"),
-    url("SuperMario256.woff") format("woff");
-}
+/* src: local("Super Mario 256 Regular"),
+    url("SuperMario256.woff") format("woff"); */
+} 
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Super Mario 256 Regular", cursive;
-  color: black;
+  color: white;
+  cursor: crosshair;  
 }
 
 body {
@@ -176,14 +177,19 @@ body {
 /*-----------------page2-------------------------------------------------------------------------------------------*/
 h1 {
   margin-top: 20px;
-  font-size: 3em;
+  font-size: 2.5em;
   opacity: 1;
 }
 
-h2:not(.long) {
+#container2 h2:not(.long) {
   margin-top: 20px;
-  font-size: 2.5em;
-  opacity: 1;
+
+}
+
+#container2 h2{
+  font-size: 1.5em;
+  opacity: 0.9;
+  text-align: center;
 }
 
 #title2 {
@@ -222,7 +228,7 @@ h2:not(.long) {
   justify-items: center;
   height: 60vh;
   width: 20vw;
-  font-size: 1em;
+  font-size: 1.3em;
   border-radius: 20px;
   line-height: 2em;
   border: 1px solid #aaa;

@@ -1,70 +1,116 @@
-var explainPage;
+var explainHTML, gameHTML, homeHTML, scoreHTML, coins, coin, bpm;
 var modeSelected = "";
-const musicbox = document.getElementById("musicbox");
-musicbox.onclick = () => {
-  if (homeMusic.paused) {
-    homeMusic.play();
-    musicbox.classList.add("musicplay");
-    musicbox.classList.remove("musicpause");
-  } else {
-    homeMusic.pause();
-    musicbox.classList.remove("musicplay");
-    musicbox.classList.add("musicpause");
-  }
-  homeMusic.loop = true;
+const homeMusic = new Audio("./sounds/music-Title.mp3");
+let score = 0;
+const coinSound = new Audio(
+  "https://freesound.org/data/previews/341/341695_5858296-lq.mp3"
+);
+var player = {
+  coin: 0,
+  score: 0,
+  touchedBy: [],
+  coinAt: [],
+  maxBPM: 0
 };
+
+var ennemi = [
+  "walking-bomb",
+  "flying-koopa",
+  "flying-bee",
+  "flying-bee",
+  "cloud"
+];
+
+axios
+  .get("./index.html")
+  .then(response => {
+    homeHTML = response.data;
+  })
+  .catch(err => {
+    console.log("index.html is not find");
+  });
 
 axios
   .get("./views/explain.html")
   .then(response => {
-    explainPage = response.data;
+    explainHTML = response.data;
     // Here we can do something with the response object
   })
   .catch(err => {
     // Here we catch the error and display it
   });
-const body = document.getElementById("all");
-const homeMusic = new Audio("./sounds/music-Title.mp3");
+
+axios
+  .get("./views/game.html")
+  .then(response => {
+    gameHTML = response.data;
+  })
+  .catch(err => {
+    console.log("game.html is not find");
+  });
+
+axios
+  .get("./views/score.html")
+  .then(response => {
+    scoreHTML = response.data;
+  })
+  .catch(err => {
+    console.log("score.html is not find");
+  });
+
 function start() {
-  let score = 0;
+  console.log("Start !");
+  const musicbox = document.getElementById("musicbox");
+  const body = document.getElementById("all");
   const coins = document.querySelectorAll(".coin");
   const title = document.getElementById("title");
-
-  // title.onmouseover = function() {
-  //   if (homeMusic.paused) {
-  //     homeMusic.play();
-  //     homeMusic.loop = true;
-  //   }
-  //   homeMusic.volume = 0.5;
-  // };
+  const popup = document.getElementById("popup");
+  title.onmouseover = function() {
+    if (homeMusic.paused) {
+      homeMusic.play();
+      homeMusic.loop = true;
+    }
+    homeMusic.volume = 0.5;
+  };
+  musicbox.onclick = () => {
+    if (homeMusic.paused) {
+      homeMusic.play();
+      musicbox.classList.add("musicplay");
+      musicbox.classList.remove("musicpause");
+    } else {
+      homeMusic.pause();
+      musicbox.classList.remove("musicplay");
+      musicbox.classList.add("musicpause");
+    }
+    homeMusic.loop = true;
+  };
 
   coins.forEach(
     e =>
-      (e.onclick = function(e) {
-        // if (homeMusic.played) {
-        //   homeMusic.play();
-        //   homeMusic.loop = true;
-        // }
+      (e.onclick = function firstCoins(e) {
+        if (homeMusic.played) {
+          homeMusic.play();
+          homeMusic.loop = true;
+        }
 
         score += 1;
-        const coinSound = new Audio(
-          "https://freesound.org/data/previews/341/341695_5858296-lq.mp3"
-        );
+
         const hereWeGoURL = new Audio(
           "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/mario-herewego.WAV"
         );
         coinSound.volume = 0.6;
         coinSound.play();
         e.target.classList.remove("coin");
-        console.log(score);
+        
         if (score === 5) {
           hereWeGoURL.play();
           // page out with sound
           title.parentElement.classList.add("scale-out");
           setTimeout(gonextpage, 500);
           function gonextpage() {
-            body.innerHTML = explainPage.substring(
-              explainPage.search("<section")
+            body.innerHTML = explainHTML.substring(
+              explainHTML.search("<body") - 4,
+              explainHTML.search("</body") + 7
             );
             refreshPage2();
           }
@@ -76,33 +122,12 @@ function start() {
 function refreshPage2() {
   //--------------------------------------------------------------------------------------------------------------------
   const peopleCard = document.querySelectorAll("#container2 .people");
-  const popup = document.getElementById("popup")
   const container = document.getElementById("container2");
   const tube = document.getElementById("tube");
-  const body = document.getElementById("all");
+  const body = document.querySelector("body");
+  var all = document.getElementById("all");
   const level = document.querySelectorAll("#container3 .level");
   const gameCSS = "../css/game.css";
-  var gameHTML = "";
-  var homeHTML = "";
-
-
-  axios
-    .get("./index.html")
-    .then(response => {
-      homeHTML = response.data;
-    })
-    .catch(err => {
-      console.log("index.html is not find");
-    });
-
-  axios
-    .get("./views/game.html")
-    .then(response => {
-      gameHTML = response.data;
-    })
-    .catch(err => {
-      console.log("game.html is not find");
-    });
 
   const moveTheBar = function(e) {
     let position = 0;
@@ -120,23 +145,28 @@ function refreshPage2() {
   }
 
   tube.onclick = function() {
-    body.querySelectorAll("*").forEach(a => a.classList.add("scale-out"));
+    all.querySelectorAll("*").forEach(a => a.classList.add("scale-out"));
     new Audio("./sounds/pipe.wav").play();
 
     setTimeout(function() {
-      body.innerHTML = homeHTML;
+      all.innerHTML = homeHTML;
       start();
-      // body = document.getElementById("all")
-      body.querySelectorAll("*").forEach(a => a.classList.remove("scale-out"));
+      all = document.getElementById("all");
+      all.querySelectorAll("*").forEach(a => a.classList.remove("scale-out"));
     }, 500);
   };
 
   function playTheGame(e) {
-    modeSelected = e.target.parentElement.id.match(/hard|normal|easy/gi) ? e.target.parentElement.id : e.target.id ;
+    modeSelected = e.target.parentElement.id.match(/hard|normal|easy/gi)
+      ? e.target.parentElement.id
+      : e.target.id;
     console.log(modeSelected);
     console.dir(e.target.parentElement.id);
 
-    body.innerHTML = gameHTML;
+    body.innerHTML = gameHTML.substring(
+      gameHTML.search("<body") - 4,
+      gameHTML.search("</body") + 7
+    );
     game();
     document.querySelector("link").href = gameCSS;
   }
@@ -148,27 +178,20 @@ function refreshPage2() {
 
 function game() {
   //----------------------------------------------------------------------------------------------------------------
-  var x,y
-  
-  var player = {
-    score: 0,
-    touchedBy: [],
-    coinAt: [],
-    canPlayCasino: score > 9 ? true : false,
-    maxBPM: 0,
-  };
+  var x, y;
+  let body = document.querySelector("body");
 
   var mode = {
     hard: {
       speed: 0.5,
-      life: 10,
+      life: 30,
       coin: 5,
       soundtrack: new Audio("./sounds/hard-soundtrack.mp3"),
       bpm: +10
     },
     normal: {
       speed: 0.4,
-      life: 30 ,
+      life: 30,
       coin: 5,
       soundtrack: new Audio("./sounds/normal-soundtrack.mp3"),
       bpm: 0
@@ -178,7 +201,7 @@ function game() {
       life: 50,
       coin: 10,
       soundtrack: new Audio("./sounds/easy-soundtrack.mp3"),
-      bpm: -20,
+      bpm: -20
     }
   };
 
@@ -200,20 +223,33 @@ function game() {
       life <= this.power
         ? (lifeDOM.textContent = "00")
         : (lifeDOM.textContent = twoDigits(life));
-        player.touchedBy.push(this.name)
-        if(+bpm.innerText.substring(0,bpm.innerText-4)> player.maxBPM) {player.maxBPM = +bpm.innerText.substring(0,bpm.innerText-4)}
-        popup.innerText = this.name + " make you lose " + this.power + " HP"
-        setTimeout(() => {
-          popup.innerText = ""
-        }, 4000);
-        
+      player.touchedBy.push(this.name);
+      if (+bpm.textContent.substring(0, bpm.textContent - 4) > player.maxBPM) {
+        player.maxBPM = +bpm.textContent.substring(0, bpm.textContent - 4);
+      }
       if (!+lifeDOM.textContent) {
         setTimeout(() => {
+          new Audio(".././sounds/gameover.wav").play();
           alert("You lose");
-        }, 500); 
-        clearInterval(bombWalk);
-        clearInterval(beeFly);
-        clearInterval(cloudRain);
+          mode[modeSelected].soundtrack.pause();
+          player.coin = +score.textContent;
+          player.maxBPM = bpm.textContent;
+          body.innerHTML = scoreHTML.substring(
+            scoreHTML.search("<body") - 4,
+            scoreHTML.search("</body") + 7
+          );
+          document.querySelector("link").href = "../css/score.css";
+          scorePage();
+        }, 500);
+        clearInterval(doItWalk);
+        clearInterval(doItFly);
+        clearInterval(makeItRain);
+        clearInterval(doKoopaFly);
+      } else {
+        popup.innerText = this.name + " takes you " + this.power + " HP";
+        setTimeout(() => {
+          popup.innerText = "";
+        }, 4000);
       }
     };
     gain = () => (score.textContent += this.power);
@@ -224,32 +260,28 @@ function game() {
       if (!p) {
         p = this.dom.classList.value.includes("start") ? "right" : "left";
       }
-
-      if (this.name === "Red Koopa") {
-        this.speed = mode[modeSelected].speed * this.speed + +score.textContent * Math.random();
-
+      if (this.name === "Cloudy"){
+        this.speed = this.speed+0.01*+score.textContent
+      }
+      if (this.name === "Koopa") {
+        this.speed =
+          mode[modeSelected].speed * this.speed +
+          +score.textContent * Math.random();
         this.x -= this.speed;
-        if(this.speed > 5) {
-          koopa.dom.classList.remove('walking-koopa')
-          koopa.dom.classList.add('flying-koopa')
-          this.y -=10
-
-
+        if (this.x < -80) this.x = window.innerWidth;
+        if (this.speed > 15) {
+          koopa.dom.classList.remove("walking-koopa");
+          koopa.dom.classList.add("flying-koopa");
+          if (this.x < -window.innerWidth) this.x = this.dom.clientWidth + 20;
+          followCursor()[1] > window.innerHeight / 2
+            ? (this.y += 100 / followCursor()[1])
+            : (this.y -= 100 / followCursor()[1]);
+          this.y < -530 ? (this.y = 0) : this.y > 0 ? (this.y = -531) : "";
         }
-        if( this.x < -80) this.x = window.innerWidth
         this.dom.style.transform = `translate(${this.x}px,${this.y}px)`;
-        if (this.x < -window.innerWidth) this.x = this.dom.clientWidth + 20;
-        followCursor()
-      console.log(this.y)
-      console.log(followCursor()[1]-852)
-
-
-      
       }
 
-
-
-      if (this.name === "Bee") {
+      if (this.name === "O'Bee One" || this.name === "2'Bee Free") {
         this.speed =
           mode[modeSelected].speed * this.speed +
           +score.textContent * Math.random();
@@ -257,15 +289,12 @@ function game() {
         if (this.y < -100) upNdown = +1;
         this.y += upNdown * this.speed;
       }
-      if (this.name === "Bob-ombs") {
-        // this.speed =  this.speed ;
-      }
-      if (p.includes("left") && this.name !== "Red Koopa") {
+      if (p.includes("left") && this.name !== "Koopa") {
         this.x -= this.speed;
         this.dom.style.transform = `translate(${this.x}px,${this.y}px)`;
         if (this.x < -window.innerWidth) this.x = this.dom.clientWidth + 20;
       }
-      if (p.includes("right" && this.name !== "Red Koopa")) {
+      if (p.includes("right") && this.name !== "Koopa") {
         this.x += this.speed;
         this.dom.style.transform = `translate(${this.x}px,${this.y}px) rotateY(180deg)`;
         if (this.x > window.innerWidth) this.x = -this.dom.clientWidth;
@@ -275,7 +304,9 @@ function game() {
   const acurateSound = () => {
     mode[modeSelected].soundtrack.playbackRate = 1 + 0.005 * score.textContent;
     bpm.innerText =
-      Math.floor(mode[modeSelected].soundtrack.playbackRate * 90 + mode[modeSelected].bpm) + " BPM";
+      Math.floor(
+        mode[modeSelected].soundtrack.playbackRate * 90 + mode[modeSelected].bpm
+      ) + " BPM";
   };
 
   // Audio -------------------------------------------------------------------------------------------
@@ -298,46 +329,55 @@ function game() {
   //   "http://23.237.126.42/ost/super-mario-bros.-3/rifwvpjl/01%20-%20Grass%20Land.mp3"
   // );
   // Initialisation -----------------------------------------------------------------------------
+  const pauseBtn = document.getElementById("howto");
   var life = mode[modeSelected].life;
   const lifeDOM = document.querySelector("#life p");
   lifeDOM.textContent = life;
   let upNdown = 1;
-  const bomb = new People("Bob-ombs", 15, document.querySelector(".bomb"));
+  const bomb = new People("Bob-ombs", 10, document.querySelector(".bomb"));
   const bees = document.querySelectorAll(".bee");
-  const bee1 = new People("Bee", 5, bees[0]);
-  const bee2 = new People("Bee", 5, bees[1]);
-  const cloud = new People("cloud", 5, document.querySelector(".cloud"));
-  const toad = document.getElementById("toad");
+  const bee1 = new People("O'Bee One", 5, bees[0]);
+  const bee2 = new People("2'Bee Free", 5, bees[1]);
+  const cloud = new People("Cloudy", 7, document.querySelector(".cloud"));
   const musicBox = document.querySelector(".music");
   const bpm = document.getElementById("bpm");
-  const koopaDOM = document.querySelector(".walking-koopa")
-  var coins;
+  const koopaDOM = document.querySelector(".walking-koopa");
+
   var score = document.querySelector("#score");
   const doItWalk = setInterval(bombWalk, 70);
   const doItFly = setInterval(beeFly, 70);
   const makeItRain = setInterval(cloudRain, 70);
-  const doKoopaFly = setInterval(koopaWalk, 70)
-  document.getElementById("all").addEventListener("mousemove",followCursor)
-  function followCursor(e){
+  const doKoopaFly = setInterval(koopaWalk, 50);
+  document.getElementById("all").addEventListener("mousemove", followCursor);
+  function followCursor(e) {
     let position = 0;
-    x = e ? e.clientX : x
-    y = e ? e.clientY : x
-  return [x,y];
-  };
-
+    x = e ? e.clientX : x;
+    y = e ? e.clientY : y;
+    return [x, y];
+  }
+  function pauseTheGame() {
+    new Audio("../sounds/pause.wav").play();
+    mode[modeSelected].soundtrack.pause();
+    setTimeout(function() {
+      alert("pause");
+      new Audio("../sounds/pause.wav").play();
+      mode[modeSelected].soundtrack.play();
+    }, 50);
+  }
+  pauseBtn.onclick = pauseTheGame;
 
   bomb.dom.addEventListener("mouseover", mouseOverBomb);
   bees.forEach(bee => bee.addEventListener("mouseover", mouseOverBee));
   cloud.dom.addEventListener("mouseover", mouseOverCloud);
 
-  function mouseOverCloud(){  
+  function mouseOverCloud(e) {
     cloud.attack();
     e.target.removeEventListener("mouseover", mouseOverCloud);
     setTimeout(() => {
       e.target.addEventListener("mouseover", mouseOverCloud);
-    }, 2000);}
+    }, 2000);
+  }
 
-  
   function mouseOverBee(e) {
     bee1.attack();
     e.target.removeEventListener("mouseover", mouseOverBee);
@@ -366,8 +406,8 @@ function game() {
     bee2.move();
   }
 
-  function koopaWalk(){
-    koopa.move()
+  function koopaWalk() {
+    koopa.move();
   }
 
   function bombExplosion() {
@@ -387,7 +427,7 @@ function game() {
     e.target.classList.remove("coin");
     e.target.removeEventListener("click", coinClicked);
     score.textContent = twoDigits(+score.textContent + 1);
-    console.log("clicked");
+    console.log("+1");
     if (!(+score.textContent % 50))
       playSound(
         "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/mario-herewego.WAV"
@@ -426,30 +466,17 @@ function game() {
     refresh(coins);
   }
 
-// function createAkoopa(){
-//   const endGrille = [...document.querySelectorAll(".end.grille")].filter(a=> !a.className.match(/bee|bomb|flying-koopa/));
-//   let n = Math.floor(Math.random() * (endGrille.length-1))
-//   endGrille[n].classList.add('flying-koopa');
-// }
+  const koopa = new People("Koopa", 7, koopaDOM);
 
-const koopa = new People("Red Koopa",7,koopaDOM)
+  koopa.dom.addEventListener("mouseover", mouseOverKoopa);
 
-koopa.dom.addEventListener("mouseover", mouseOverKoopa);
-
-  function mouseOverKoopa(){  
+  function mouseOverKoopa() {
     koopa.attack();
     e.target.removeEventListener("mouseover", mouseOverKoopa);
     setTimeout(() => {
       e.target.addEventListener("mouseover", mouseOverKoopa);
-    }, 2000);}
-
-
-
-
-
-
-
-
+    }, 2000);
+  }
 
   function refresh(dom) {
     if (dom === coins) {
@@ -461,6 +488,94 @@ koopa.dom.addEventListener("mouseover", mouseOverKoopa);
 
   function repeatFunction(f, times) {
     [...Array(times)].forEach(a => f());
+  }
+}
+
+// function goScorePage(){
+
+//   body.innerHTML = scoreHTML;
+// }
+
+function scorePage() {
+  function calculWorstEnnemi(arr) {
+    let name = ["Bob-ombs", "Koopa", "O'Bee One", "2'Bee Free", "Cloudy"];
+    let nameRpt = [
+      arr.filter(a => a === "Bob-ombs").length,
+      arr.filter(a => a === "Koopa").length,
+      arr.filter(a => a === "O'Bee One").length,
+      arr.filter(a => a === "2'Bee Free").length,
+      arr.filter(a => a === "Cloudy").length
+    ];
+    return [
+      nameRpt
+        .map((a, i, arr) => (a === Math.max(...arr) ? name[i] : ""))
+        .filter(a => a !== "")[0],
+      ennemi[
+        nameRpt
+          .map((a, i, arr) => (a === Math.max(...arr) ? i : ""))
+          .filter(a => a !== "")[0]
+      ],
+      Math.max(...nameRpt)
+    ];
+  }
+
+  document
+    .querySelector("#worst-ennemi div")
+    .classList.add(calculWorstEnnemi(player.touchedBy)[1]);
+  document.querySelector("#worst-ennemi p").textContent = `"I kicked your ass ${
+    calculWorstEnnemi(player.touchedBy)[2]
+  } time${calculWorstEnnemi(player.touchedBy)[2] > 1 ? "s" : ""} tho"`;
+  const worstEnnemi = calculWorstEnnemi(player.touchedBy)[0];
+  let coinsDOM = document.getElementById("coins");
+  let bpmDOM = document.getElementById("bpm");
+  let totalDOM = document.getElementById("total-score");
+  const worstEnnemiDOM = document.querySelector("#worst-ennemi>h2");
+  let bpm = +player.maxBPM.substring(0, 3);
+  let increasePointsExecuted = false;
+  let i = 0;
+  let j = 0;
+  let k = 0;
+  let total = +player.coin + bpm;
+  const soundEnd = new Audio(".././sounds/fin-score.wav");
+  const pointCount = setInterval(increasePoints, 25);
+
+  worstEnnemiDOM.textContent = worstEnnemi;
+
+  function increasePoints() {
+    i < player.coin ? i++ : i;
+    j < bpm ? j++ : j;
+    coinsDOM.textContent = i;
+    bpmDOM.textContent = j;
+    if (i === player.coin && j === bpm) {
+      setTimeout(increaseTotal, 500);
+      if (!increasePointsExecuted) {
+        new Audio(
+          "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/mario-woohoo.WAV"
+        ).play();
+      }
+      increasePointsExecuted = true;
+    }
+  }
+
+  function increaseTotal() {
+    k < total ? k++ : k;
+    totalDOM.textContent = k;
+    if (!(k % 5))
+      new Audio(
+        "https://freesound.org/data/previews/341/341695_5858296-lq.mp3"
+      ).play();
+    if (k === total) {
+      clearInterval(pointCount);
+      setTimeout(function() {
+        soundEnd.play();
+      }, 500);
+      //   (function(){
+      //     document.querySelector('body').innerHTML = explainHTML.substring(
+      //       explainHTML.search("<body")-4,explainHTML.search("</body")+7)
+      //     refreshPage2();
+      //     document.querySelector('link').href = "../css/home-style.css"
+      // })()
+    }
   }
 }
 

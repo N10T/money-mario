@@ -25,7 +25,7 @@ color: #92FE04;
 #all{
     height: 100vh;
     width: 100vw;
-
+z-index: 10000;
   }
   
 #chrono {
@@ -262,10 +262,12 @@ background-position-y: bottom;
 }
 
 #popup{
+  z-index: 0;
   position: fixed;
   text-align: center;
   width: 100vw;
-  font-size: 40px;
+  font-size: 60px;
+  margin-top: 1vw;
   text-shadow: #FC0 1px 0 10px;
 }
 
