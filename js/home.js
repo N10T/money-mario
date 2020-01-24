@@ -123,7 +123,7 @@ function refreshPage2() {
   //--------------------------------------------------------------------------------------------------------------------
   const peopleCard = document.querySelectorAll("#container2 .people");
   const container = document.getElementById("container2");
-  const tube = document.getElementById("tube");
+  // const tube = document.getElementById("tube");
   const body = document.querySelector("body");
   var all = document.getElementById("all");
   const level = document.querySelectorAll("#container3 .level");
@@ -144,17 +144,17 @@ function refreshPage2() {
     new Audio("./sounds/select_level_kick.wav").play();
   }
 
-  tube.onclick = function() {
-    all.querySelectorAll("*").forEach(a => a.classList.add("scale-out"));
-    new Audio("./sounds/pipe.wav").play();
+  // tube.onclick = function() {
+  //   all.querySelectorAll("*").forEach(a => a.classList.add("scale-out"));
+  //   new Audio("./sounds/pipe.wav").play();
 
-    setTimeout(function() {
-      all.innerHTML = homeHTML;
-      start();
-      all = document.getElementById("all");
-      all.querySelectorAll("*").forEach(a => a.classList.remove("scale-out"));
-    }, 500);
-  };
+  //   setTimeout(function() {
+  //     all.innerHTML = homeHTML;
+  //     start();
+  //     all = document.getElementById("all");
+  //     all.querySelectorAll("*").forEach(a => a.classList.remove("scale-out"));
+  //   }, 500);
+  // };
 
   function playTheGame(e) {
     modeSelected = e.target.parentElement.id.match(/hard|normal|easy/gi)
@@ -231,6 +231,7 @@ function game() {
         setTimeout(() => {
           new Audio(".././sounds/gameover.wav").play();
           alert("You lose");
+
           mode[modeSelected].soundtrack.pause();
           player.coin = +score.textContent;
           player.maxBPM = bpm.textContent;
@@ -240,7 +241,8 @@ function game() {
           );
           document.querySelector("link").href = "../css/score.css";
           scorePage();
-        }, 500);
+        }, 200);
+        document.getElementsByClassName('grille').forEach(a=>classList.remove("coin"))
         clearInterval(doItWalk);
         clearInterval(doItFly);
         clearInterval(makeItRain);
@@ -261,7 +263,7 @@ function game() {
         p = this.dom.classList.value.includes("start") ? "right" : "left";
       }
       if (this.name === "Cloudy"){
-        this.speed = this.speed+0.01*+score.textContent
+        this.speed = this.speed+0.01*mode[modeSelected].speed*+score.textContent
       }
       if (this.name === "Koopa") {
         this.speed =
@@ -491,11 +493,6 @@ function game() {
   }
 }
 
-// function goScorePage(){
-
-//   body.innerHTML = scoreHTML;
-// }
-
 function scorePage() {
   function calculWorstEnnemi(arr) {
     let name = ["Bob-ombs", "Koopa", "O'Bee One", "2'Bee Free", "Cloudy"];
@@ -556,7 +553,16 @@ function scorePage() {
       increasePointsExecuted = true;
     }
   }
-
+  function restartHandler(){
+    soundEnd.pause()
+    player.touchedBy = []
+      document.querySelector('body').innerHTML = explainHTML.substring(
+        explainHTML.search("<body")-4,explainHTML.search("</body")+7)
+      refreshPage2();
+      homeMusic.play()
+      document.querySelector('link').href = "../css/home-style.css"
+  }
+  document.getElementById('restart').onclick = restartHandler
   function increaseTotal() {
     k < total ? k++ : k;
     totalDOM.textContent = k;
@@ -568,13 +574,7 @@ function scorePage() {
       clearInterval(pointCount);
       setTimeout(function() {
         soundEnd.play();
-      }, 500);
-      //   (function(){
-      //     document.querySelector('body').innerHTML = explainHTML.substring(
-      //       explainHTML.search("<body")-4,explainHTML.search("</body")+7)
-      //     refreshPage2();
-      //     document.querySelector('link').href = "../css/home-style.css"
-      // })()
+         }, 500);
     }
   }
 }

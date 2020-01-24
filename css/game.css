@@ -158,6 +158,7 @@ background-position-y: bottom;
 }
 
 .music{
+  margin-right: 1vh;
   background: url(../img/music-5-250-50.png); 
   width: calc(250px/5);
   height: 50px;

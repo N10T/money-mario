@@ -122,41 +122,6 @@ body {
   }
 }
 
-@-webkit-keyframes heartbeat {
-  from {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-  }
-  10% {
-    -webkit-transform: scale(0.91);
-    transform: scale(0.91);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-  }
-  17% {
-    -webkit-transform: scale(0.98);
-    transform: scale(0.98);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-  }
-  33% {
-    -webkit-transform: scale(0.87);
-    transform: scale(0.87);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-  }
-  45% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-  }
-}
-
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0;
@@ -197,13 +162,14 @@ h1 {
   height: 15vh;
   width: 100vw;
   text-align: center;
-  background: no-repeat url("../img/AreYouReady.png");
-  background-size: auto;
+  background: no-repeat url("../img/look-enemy.png"); 
+  background-size: contain;
   background-position-x: center;
   animation: pulsate-bck 1s ease-in-out infinite both;
 }
 
 #container2 {
+  margin-top: 1vh;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(7, auto);
@@ -216,7 +182,7 @@ h1 {
   display: grid;
   justify-content: center;
   align-items: flex-end;
-  margin: 2vw;
+  margin: 0 2vw;
   grid-template-columns: repeat(3, auto);
   grid-gap: 1vw;
 }
@@ -238,6 +204,18 @@ h1 {
   -moz-transition: all 0.3s linear;
   -o-transition: all 0.3s linear;
   transition: all 0.3s linear;
+}
+
+.select{
+  background-image: url("../img/select-difficulty.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  height: 8vh;
+  width: 100vw;
+  margin: 1vh 3vh ;
+  background-position-x: center;
+  animation: pulsate-bck 1s ease-in-out infinite both;
 }
 
 #container3 .people:hover {
@@ -315,10 +293,6 @@ h1 {
   left: 0px;
 }
 
-.scale-up-bl {
-  -webkit-animation: scale-up-bl 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-  animation: scale-up-bl 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-}
 
 @keyframes animate5 {
   from {
@@ -338,27 +312,6 @@ h1 {
   }
 }
 
-@keyframes scale-up-bl {
-  0% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
-  }
-  50% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
-  }
-
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
-  }
-}
 
 .people p {
   font-size: 20px;
@@ -427,28 +380,6 @@ h1 {
   height: 50px;
 }
 
-.speed-fast {
-  background: url("../img/001-fast.png");
-  background-size: contain;
-  height: 70px;
-  width: 70px;
-}
-
-.speed-medium {
-  background: url("../img/003-medium.png");
-  background-size: contain;
-  height: 70px;
-  width: 70px;
-}
-
-.speed-slow {
-  background: url("../img/002-slow.png");
-  background-size: contain;
-  height: 70px;
-  width: 70px;
-  text-align: center;
-}
-
 @keyframes falling-bomb {
   from {
     background-position: 0;
@@ -501,3 +432,5 @@ h1 {
     background-position: 526px;
   }
 }
+
+
