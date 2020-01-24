@@ -239,7 +239,7 @@ function game() {
             scoreHTML.search("<body") - 4,
             scoreHTML.search("</body") + 7
           );
-          document.querySelector("link").href = "../css/score.css";
+          document.querySelector("link").href = "./css/score.css";
           scorePage();
         }, 200);
         document.getElementsByClassName('grille').forEach(a=>classList.remove("coin"))
