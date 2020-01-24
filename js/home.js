@@ -127,7 +127,7 @@ function refreshPage2() {
   const body = document.querySelector("body");
   var all = document.getElementById("all");
   const level = document.querySelectorAll("#container3 .level");
-  const gameCSS = "../css/game.css";
+  const gameCSS = "./css/game.css";
 
   const moveTheBar = function(e) {
     let position = 0;
@@ -560,7 +560,7 @@ function scorePage() {
         explainHTML.search("<body")-4,explainHTML.search("</body")+7)
       refreshPage2();
       homeMusic.play()
-      document.querySelector('link').href = "../css/home-style.css"
+      document.querySelector('link').href = "./css/home-style.css"
   }
   document.getElementById('restart').onclick = restartHandler
   function increaseTotal() {
