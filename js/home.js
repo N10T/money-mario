@@ -229,7 +229,7 @@ function game() {
       }
       if (!+lifeDOM.textContent) {
         setTimeout(() => {
-          new Audio(".././sounds/gameover.wav").play();
+          new Audio("./sounds/gameover.wav").play();
           alert("You lose");
 
           mode[modeSelected].soundtrack.pause();
@@ -533,7 +533,7 @@ function scorePage() {
   let j = 0;
   let k = 0;
   let total = +player.coin + bpm;
-  const soundEnd = new Audio(".././sounds/fin-score.wav");
+  const soundEnd = new Audio("./sounds/fin-score.wav");
   const pointCount = setInterval(increasePoints, 25);
 
   worstEnnemiDOM.textContent = worstEnnemi;
