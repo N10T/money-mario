@@ -326,7 +326,7 @@ function game() {
     "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/cannon-fire.WAV";
   const ouch =
     "http://www.mariomayhem.com/downloads/sounds/mario_64_sound_effects/mario-lowonhealth.WAV";
-  const bizz = "../sounds/bee_bump.wav";
+  const bizz = "./sounds/bee_bump.wav";
   // const marioSoundtrack = new Audio(
   //   "http://23.237.126.42/ost/super-mario-bros.-3/rifwvpjl/01%20-%20Grass%20Land.mp3"
   // );
@@ -358,11 +358,11 @@ function game() {
     return [x, y];
   }
   function pauseTheGame() {
-    new Audio("../sounds/pause.wav").play();
+    new Audio("./sounds/pause.wav").play();
     mode[modeSelected].soundtrack.pause();
     setTimeout(function() {
       alert("pause");
-      new Audio("../sounds/pause.wav").play();
+      new Audio("./sounds/pause.wav").play();
       mode[modeSelected].soundtrack.play();
     }, 50);
   }
@@ -391,7 +391,7 @@ function game() {
   repeatFunction(createACoin, 5);
 
   musicBox.onclick = () => {
-    new Audio("../sounds/pause.wav").play();
+    new Audio("./sounds/pause.wav").play();
     mode[modeSelected].soundtrack.paused
       ? mode[modeSelected].soundtrack.play()
       : mode[modeSelected].soundtrack.pause();
