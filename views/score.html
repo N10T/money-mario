@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="../css/score.css" />
     <script src="alert/dist/sweetalert-dev.js"></script>
-    <link rel="stylesheet" href="alert/dist/sweetalert.css">
+    <link rel="stylesheet" href="alert/dist/sweetalert.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -14,11 +14,11 @@
     <div id="score-all" class="flex center column ">
       <div id="score-title" class="center flex"></div>
       <div class="center flex">
-        <section id="worst-ennemi">
+        <section id="worst-ennemi" class="bounce-in-top">
           <h4>Worst Enemy</h4>
           <h2></h2>
           <div></div>
-          <hr>
+          <hr />
           <p>"I have your head !"</p>
         </section>
         <section id="score-right">
@@ -26,9 +26,12 @@
           <div><span>BPM bonus :</span><span id="bpm"></span></div>
           <!-- <div><span>Time :</span><span>60sec</span></div> -->
           <hr />
-          <div id="total"><span>Total</span><br><span id="total-score"></span><br><span>points</span></div>
+          <div id="total">
+            <span>Total</span><br /><span id="total-score"></span><br /><span
+              >points</span
+            >
+          </div>
         </section>
-    
       </div>
       <div id="restart" class="flex center column "></div>
     </div>

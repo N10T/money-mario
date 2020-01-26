@@ -1,11 +1,10 @@
-
 @font-face {
   font-family: "Super Mario 256 Regular";
   font-style: normal;
   font-weight: normal;
-/* src: local("Super Mario 256 Regular"),
+  /* src: local("Super Mario 256 Regular"),
     url("SuperMario256.woff") format("woff"); */
-} 
+}
 
 * {
   margin: 0;
@@ -13,7 +12,6 @@
   box-sizing: border-box;
   font-family: "Super Mario 256 Regular", cursive;
   color: white;
-  cursor: crosshair;  
 }
 
 body {
@@ -33,6 +31,8 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
 }
 
 #container {
@@ -148,10 +148,9 @@ h1 {
 
 #container2 h2:not(.long) {
   margin-top: 20px;
-
 }
 
-#container2 h2{
+#container2 h2 {
   font-size: 1.5em;
   opacity: 0.9;
   text-align: center;
@@ -162,7 +161,7 @@ h1 {
   height: 10vh;
   width: 100vw;
   text-align: center;
-  background: no-repeat url("../img/look-enemy.png"); 
+  background: no-repeat url("../img/look-enemy.png");
   background-size: contain;
   background-position-x: center;
   animation: pulsate-bck 1s ease-in-out infinite both;
@@ -189,7 +188,6 @@ h1 {
 
 .people {
   opacity: 0.7;
-  cursor: none;
   display: grid;
   justify-items: center;
   height: 60vh;
@@ -206,14 +204,14 @@ h1 {
   transition: all 0.3s linear;
 }
 
-.select{
+.select {
   background-image: url("../img/select-difficulty.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position-x: center;
   height: 8vh;
   width: 100vw;
-  margin: 1vh 3vh ;
+  margin: 1vh 3vh;
   background-position-x: center;
   animation: pulsate-bck 1s ease-in-out infinite both;
 }
@@ -293,7 +291,6 @@ h1 {
   left: 0px;
 }
 
-
 @keyframes animate5 {
   from {
     background-position: 0;
@@ -312,7 +309,6 @@ h1 {
   }
 }
 
-
 .people p {
   font-size: 20px;
   margin: 0 20px;
@@ -325,18 +321,21 @@ h1 {
   background-repeat: no-repeat;
   animation: pulsate-bck 1s ease-in-out infinite both;
 }
+
 .long {
   margin-top: 20px;
   font-size: 2.5em;
   height: 0;
   opacity: 1;
 }
+
 .walking-bomb {
   background: url("../img/bomb-8-994-100.png");
   width: calc(994px / 8);
   height: 100px;
   animation: animatebomb 1s steps(8) infinite;
 }
+
 .falling-bomb {
   background: url("../img/falling-bomb-6-837-171.png");
   width: calc(837px / 6);
@@ -344,21 +343,25 @@ h1 {
   animation: falling-bomb 1s steps(6) infinite;
   transform: scale(1);
 }
+
 .falling-bomb-explose {
   background: url("../img/bomb-floor-6-837-131.png");
 }
+
 .flying-koopa {
   background: url("../img/koopa-fly-red-9-100-800.png");
   width: calc(765px / 9);
   height: 100px;
   animation: flying-koopa 1s steps(9) infinite;
 }
+
 .walking-koopa {
   background: url("../img/koopa-walk-red-6-100-510.png");
   width: calc(510px / 6);
   height: 100px;
   animation: walking-koopa 1s steps(6) infinite;
 }
+
 .cloud {
   background: url("../img/nuage-8-100-526.png");
   width: calc(526px / 8);
@@ -366,12 +369,14 @@ h1 {
   animation: cloud8 2s steps(8) reverse infinite;
   transform: scale(1.5);
 }
+
 .flying-bee {
   background: url("../img/bee-4-100-427.png");
   width: calc(427px / 4);
   height: 100px;
   animation: bee4 0.5s steps(4) infinite;
 }
+
 .coin-image {
   background: url("../img/classic-coin-6-50-300.png");
   width: calc(300px / 6);
@@ -433,4 +438,8 @@ h1 {
   }
 }
 
-
+#all:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}

@@ -101,7 +101,7 @@ function start() {
         coinSound.volume = 0.6;
         coinSound.play();
         e.target.classList.remove("coin");
-        
+
         if (score === 5) {
           hereWeGoURL.play();
           // page out with sound
@@ -242,7 +242,9 @@ function game() {
           document.querySelector("link").href = "./css/score.css";
           scorePage();
         }, 200);
-        document.getElementsByClassName('grille').forEach(a=>classList.remove("coin"))
+        document
+          .getElementsByClassName("grille")
+          .forEach(a => classList.remove("coin"));
         clearInterval(doItWalk);
         clearInterval(doItFly);
         clearInterval(makeItRain);
@@ -262,8 +264,9 @@ function game() {
       if (!p) {
         p = this.dom.classList.value.includes("start") ? "right" : "left";
       }
-      if (this.name === "Cloudy"){
-        this.speed = this.speed+0.01*mode[modeSelected].speed*+score.textContent
+      if (this.name === "Cloudy") {
+        this.speed =
+          this.speed + 0.01 * mode[modeSelected].speed * +score.textContent;
       }
       if (this.name === "Koopa") {
         this.speed =
@@ -553,16 +556,18 @@ function scorePage() {
       increasePointsExecuted = true;
     }
   }
-  function restartHandler(){
-    soundEnd.pause()
-    player.touchedBy = []
-      document.querySelector('body').innerHTML = explainHTML.substring(
-        explainHTML.search("<body")-4,explainHTML.search("</body")+7)
-      refreshPage2();
-      homeMusic.play()
-      document.querySelector('link').href = "./css/home-style.css"
+  function restartHandler() {
+    soundEnd.pause();
+    player.touchedBy = [];
+    document.querySelector("body").innerHTML = explainHTML.substring(
+      explainHTML.search("<body") - 4,
+      explainHTML.search("</body") + 7
+    );
+    refreshPage2();
+    homeMusic.play();
+    document.querySelector("link").href = "./css/home-style.css";
   }
-  document.getElementById('restart').onclick = restartHandler
+  document.getElementById("restart").onclick = restartHandler;
   function increaseTotal() {
     k < total ? k++ : k;
     totalDOM.textContent = k;
@@ -574,7 +579,7 @@ function scorePage() {
       clearInterval(pointCount);
       setTimeout(function() {
         soundEnd.play();
-         }, 500);
+      }, 500);
     }
   }
 }

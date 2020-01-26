@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
 @font-face {
   font-family: "Super Mario 256 Regular";
   font-style: normal;
@@ -14,20 +14,20 @@ color: #92FE04;
  */
 
 * {
-  	margin: 0;
-	  padding: 0;
-    box-sizing: border-box;
-    font-family:"Super Mario 256 Regular", 'Press Start 2P', cursive;
-    color: white;
-    overflow: hidden;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Super Mario 256 Regular", "Press Start 2P", cursive;
+  color: white;
+  overflow: hidden;
+}
 
-#all{
-    height: 100vh;
-    width: 100vw;
-z-index: 10000;
-  }
-  
+#all {
+  height: 100vh;
+  width: 100vw;
+  z-index: 10000;
+}
+
 #chrono {
   height: 5%;
   width: 100vw;
@@ -35,7 +35,7 @@ z-index: 10000;
 
 #main {
   background: url(../img/background-mario-wallpaper-20-main.png);
-  background-position: bottom ;
+  background-position: bottom;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 95%;
@@ -45,19 +45,25 @@ z-index: 10000;
 #grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(4vw, 1fr));
-  /* grid-template-rows:  repeat(12, 1fr); */
-  
-  
   width: 100vw;
-  cursor: crosshair;  
+  cursor: move;
+  cursor: grab;
   font-size: 6px;
 }
 
-#left,#right{
+#grid:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+#left,
+#right {
   height: 100vh;
 }
 
-#left>div,#right>div{
+#left > div,
+#right > div {
   border: 1px solid black;
 }
 
@@ -70,14 +76,14 @@ z-index: 10000;
   font-size: 25px;
 }
 
-#howto{
-background: url(../img/howto-5-250-50.png); 
-width: calc(250px/5);
-height: 55px;
-animation: animate5 1s steps(5) infinite;
+#howto {
+  background: url(../img/howto-5-250-50.png);
+  width: calc(250px / 5);
+  height: 55px;
+  animation: animate5 1s steps(5) infinite;
 }
 
-.grille{
+.grille {
   display: grid;
   justify-content: center;
   /* border: 1px black solid; */
@@ -88,91 +94,91 @@ animation: animate5 1s steps(5) infinite;
   min-height: 50px;
 }
 
-#points{
+#points {
   width: auto;
-padding-left: 40px;
+  padding-left: 40px;
 }
 
-#toad{
-border: none;
-margin: 0 auto;
-background: url(../img/Toad-walk-little-130-50.png);
-background-position: bottom;
-width: calc(130px/3);
-height: 50px;
-animation: animate3 1s steps(3) infinite;
+#toad {
+  border: none;
+  margin: 0 auto;
+  background: url(../img/Toad-walk-little-130-50.png);
+  background-position: bottom;
+  width: calc(130px / 3);
+  height: 50px;
+  animation: animate3 1s steps(3) infinite;
 }
 
 .bomb {
-background: url(../img/bomb-8-994-100.png);
-width: calc(994px/8);
-height: 100px;
-animation: animatebomb 1s steps(8) infinite;
-background-position-y: bottom;
+  background: url(../img/bomb-8-994-100.png);
+  width: calc(994px / 8);
+  height: 100px;
+  animation: animatebomb 1s steps(8) infinite;
+  background-position-y: bottom;
 }
 
-.bomb-about-to{
-background: url(../img/bomb-6-1423-235.png);
-width: calc(1423px/6);
-height: 235px;
-animation: animateexplose 1s steps(6) infinite;
-background-position-y: bottom;
+.bomb-about-to {
+  background: url(../img/bomb-6-1423-235.png);
+  width: calc(1423px / 6);
+  height: 235px;
+  animation: animateexplose 1s steps(6) infinite;
+  background-position-y: bottom;
 }
 
 .bomb-explose {
   background: url(../img/bomb-6-606-100-explosion.png);
-  width: calc(606px/6);
+  width: calc(606px / 6);
   height: 100px;
   animation: animateexplose 1s steps(6) infinite;
   background-position-y: bottom;
 }
 
-.start,.end{
+.start,
+.end {
   display: grid;
   grid-row: span 2;
   border: none;
   margin: 0 auto;
-  }
+}
 
 .coin {
-    background: url(../img/classic-coin-6-50-300.png);
-    width: calc(300px/6);
-    height: 50px;
-    animation: animate6 1s steps(6) infinite;
-  }
+  background: url(../img/classic-coin-6-50-300.png);
+  width: calc(300px / 6);
+  height: 50px;
+  animation: animate6 1s steps(6) infinite;
+}
 
-.bee{
+.bee {
   background: url(../img/bee-4-100-427.png);
   background-position: bottom;
-  width: calc(427px/4);
+  width: calc(427px / 4);
   height: 100px;
   animation: bee4 0.5s steps(4) infinite;
 }
 
-.cloud{
+.cloud {
   background: url(../img/nuage-8-100-526.png);
   background-position: bottom;
-  width: calc(526px/8);
+  width: calc(526px / 8);
   height: 100px;
   animation: cloud8 2s steps(8) reverse infinite;
 }
 
-.music{
+.music {
   margin-right: 1vh;
-  background: url(../img/music-5-250-50.png); 
-  width: calc(250px/5);
+  background: url(../img/music-5-250-50.png);
+  width: calc(250px / 5);
   height: 50px;
   animation: animate5 1s steps(5) infinite;
 }
 
-.lifes{
-  background: url(../img/1-up-mushroom-png-5-transparent.png); 
-  background-size: 50px ;
+.lifes {
+  background: url(../img/1-up-mushroom-png-5-transparent.png);
+  background-size: 50px;
   padding-left: 55px;
   background-repeat: no-repeat;
   height: 50px;
 }
-
 
 @keyframes cloud8 {
   from {
@@ -215,7 +221,7 @@ background-position-y: bottom;
     background-position: 0;
   }
   to {
-    background-position: calc(50px*6);
+    background-position: calc(50px * 6);
   }
 }
 
@@ -241,7 +247,7 @@ background-position-y: bottom;
   display: flex;
 }
 
-.column{
+.column {
   flex-direction: column;
 }
 
@@ -249,75 +255,76 @@ background-position-y: bottom;
   justify-content: center;
 }
 
-.space-around{
+.space-around {
   justify-content: space-around;
 }
 
-.vcenter{
+.vcenter {
   align-items: center;
 }
 
-.vbottom{
+.vbottom {
   align-items: flex-end;
 }
 
-#popup{
+#popup {
   z-index: 0;
   position: fixed;
   text-align: center;
   width: 100vw;
   font-size: 60px;
   margin-top: 1vw;
-  text-shadow: #FC0 1px 0 10px;
+  text-shadow: #fc0 1px 0 10px;
 }
 
-.walking-bomb{
+.walking-bomb {
   background: url(../img/bomb-8-994-100.png);
-  width: calc(994px/8);
+  width: calc(994px / 8);
   height: 100px;
   animation: animatebomb 1s steps(8) infinite;
 }
-.falling-bomb{
-  background:  url("../img/falling-bomb-6-837-171.png");
-  width: calc(837px/6);
+.falling-bomb {
+  background: url("../img/falling-bomb-6-837-171.png");
+  width: calc(837px / 6);
   height: 171px;
   animation: falling-bomb 1s steps(6) infinite;
   transform: scale(1);
-
 }
-.falling-bomb-explose{
-  background: url('../img/bomb-floor-6-837-131.png');
+.falling-bomb-explose {
+  background: url("../img/bomb-floor-6-837-131.png");
 }
-.flying-koopa{
-  background: url('../img/koopa-fly-red-9-100-800.png');
-  width: calc(765px/9);
+.flying-koopa {
+  background: url("../img/koopa-fly-red-9-100-800.png");
+  width: calc(765px / 9);
   height: 100px;
   animation: flying-koopa 1s steps(9) infinite;
 }
-.walking-koopa{
-  background: url('../img/koopa-walk-red-6-100-510.png');
-  width: calc(510px/6);
+.walking-koopa {
+  background: url("../img/koopa-walk-red-6-100-510.png");
+  width: calc(510px / 6);
   height: 100px;
   animation: walking-koopa 1s steps(6) infinite;
 }
-.cloud{
-  background: url('../img/nuage-8-100-526.png');
-  width: calc(526px/8);
+.cloud {
+  background: url("../img/nuage-8-100-526.png");
+  width: calc(526px / 8);
   height: 100px;
   animation: cloud8 2s steps(8) reverse infinite;
   transform: scale(1.5);
 }
-.flying-bee{
-  background: url('../img/bee-4-100-427.png');
-  width: calc(427px/4);
+.flying-bee {
+  background: url("../img/bee-4-100-427.png");
+  width: calc(427px / 4);
   height: 100px;
   animation: bee4 0.5s steps(4) infinite;
 }
 
-  .active {
-      -webkit-animation: flip-horizontal-bck 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-              animation: flip-horizontal-bck 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-  }
+.active {
+  -webkit-animation: flip-horizontal-bck 0.2s
+    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: flip-horizontal-bck 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    both;
+}
 
 #life p {
   margin: 0 5px;
@@ -335,24 +342,24 @@ background-position-y: bottom;
  * animation flip-horizontal-bck
  * ----------------------------------------
  */
- @-webkit-keyframes flip-horizontal-bck {
+@-webkit-keyframes flip-horizontal-bck {
   0% {
     -webkit-transform: translateZ(0) rotateX(0);
-            transform: translateZ(0) rotateX(0);
+    transform: translateZ(0) rotateX(0);
   }
   100% {
     -webkit-transform: translateZ(-260px) rotateX(180deg);
-            transform: translateZ(-260px) rotateX(180deg);
+    transform: translateZ(-260px) rotateX(180deg);
   }
 }
 @keyframes flip-horizontal-bck {
   0% {
     -webkit-transform: translateZ(0) rotateX(0);
-            transform: translateZ(0) rotateX(0);
+    transform: translateZ(0) rotateX(0);
   }
   100% {
     -webkit-transform: translateZ(-260px) rotateX(180deg);
-            transform: translateZ(-260px) rotateX(180deg);
+    transform: translateZ(-260px) rotateX(180deg);
   }
 }
 
@@ -364,7 +371,6 @@ background-position-y: bottom;
     background-position: 837px;
   }
 }
-
 
 @keyframes walking-koopa {
   from {
@@ -402,10 +408,10 @@ background-position-y: bottom;
   }
 }
 @keyframes cloud8 {
-    from {
-      background-position: 0;
-    }
-    to {
-      background-position: 526px;
-    }
+  from {
+    background-position: 0;
   }
+  to {
+    background-position: 526px;
+  }
+}
